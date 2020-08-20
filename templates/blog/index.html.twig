@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body  {
+            background-color: #ddd;
+        }
+        .card{
+            padding: 20px;
+            box-shadow: 2px 2px 2px #aaa;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="articles">
+        {% for article in articles %}
+            <article class="mt-4 card">
+                <h2> {{article.title}}</h2>
+                <div class="metadata mt-2"><em>Ecrit le {{ article.createdAt | date('d/m/Y')}} à {{ article.createdAt | date('H:i') }} dans la catégorie {{ article.category.title }}</em></div>
+                <div class="content">
+                    <img src="" alt="">
+                    <div class="content">
+                        <p>
+                           <img src="{{ article.image }}" alt="">
+                        </p>
+                        <p>
+                            {{ article.content | raw | nl2br}}
+                        </p>
+                        <a href="{{ path('blog_show', {'id':article.id}) }}" class="btn btn-primary" target="blank">Lire la suite</a>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+            
+    </section>
+    
+{% endblock %}
+  
